@@ -75,14 +75,17 @@ def run(page):
 def args():
   parser = argparse.ArgumentParser(description='Measure page load times and save to database.')
   parser.add_argument('--cores', default=1, type=int, help='Number of processes')
-  parser.add_argument('--sites', default='sites.txt', help='Number of processes')
+  parser.add_argument('--sites', default='sites.txt', help='Location of sites file')
+  parser.add_argument('--headless', default=False, type=bool, help='Run headlessly')
   return parser.parse_args()
 
-def start_drivers():
+def start_drivers(headless = False):
   for x in range(0,args.cores):
+    options = Options()
+    options.headless = headless
     capabilities = DesiredCapabilities.FIREFOX
-    driver = webdriver.Remote('http://127.0.0.1:4444/wd/hub',
-      desired_capabilities=capabilities)
+    driver = webdriver.Remote(os.environ.get('BROWSER'),
+      desired_capabilities=capabilities, options=options)
 
     queue.put(driver)
 
@@ -96,7 +99,7 @@ if __name__ == '__main__':
   pages = load_page_file(args.sites)
   pprint(pages)
 
-  start_drivers()
+  start_drivers(args.headless)
 
 
   e = concurrent.futures.ThreadPoolExecutor(args.cores)

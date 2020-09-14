@@ -53,10 +53,10 @@ Just create a database called ```timer```
 
 # Usage
 ```
-python run.py --cores 1 --sites ./sites.txt
+python run.py --cores 1 --sites ./sites.txt --headless False
 ```
 
-The default value for ```cores``` is ```1``` and the default value for ```sites``` is ```sites.txt```
+The default value for ```cores``` is ```1```, the default value for ```sites``` is ```sites.txt```, and the default value for ```headless``` is ```False```
 
 When you start up the program, there should pop up firefox windows, as many as the ```cores``` argument was set to. The program will print out how many cores were selected and it will list out all the pages to be opened from the file chosen by the  ```sites``` argument.
 
