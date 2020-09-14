@@ -1,6 +1,6 @@
-# Scraper
+# Page load timer
 
-## Setting up the environm ent
+## Setting up the environm env
 
 #### Virtualenv
 I use virtualenv but it is not strictly speaking necessary
